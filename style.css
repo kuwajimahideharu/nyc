@@ -1550,6 +1550,16 @@ img {
     }
     
     /* モバイルナビゲーション */
+    .navbar {
+        pointer-events: none;
+    }
+    
+    .nav-container .logo,
+    .nav-container .mobile-toggle,
+    .nav-container .status-indicator {
+        pointer-events: auto;
+    }
+    
     .mobile-toggle {
         display: block;
     }
