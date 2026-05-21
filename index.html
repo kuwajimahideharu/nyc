@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Loft Cafe & Roasters | ニューヨークスタイルの本格ロースタリー</title>
+    <meta name="description" content="ブルックリンのインダストリアルロフトをイメージした、洗練された空間と極上の自家焙煎コーヒーを提供する「NYC Loft Cafe & Roasters」。都会の喧騒を離れ、特別な一杯をお楽しみください。">
+    
+    <!-- Google Fonts: プレミアムなフォント構成 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome (アイコン用) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- スタイルシートの読み込み -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ナビゲーションバー (グラスモフィズム適用) -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-accent">NYC</span> LOFT
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#story" class="nav-link">Our Story</a>
+                <a href="#menu" class="nav-link">Menu</a>
+                <a href="#location" class="nav-link">Access</a>
+                <a href="#reservation" class="nav-link-btn">Reserve a Seat</a>
+            </nav>
+            
+            <div class="nav-meta">
+                <!-- 営業時間インジケーター (JavaScriptで動的に更新) -->
+                <div class="status-indicator" id="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text" id="status-text">Loading...</span>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="メニューを開く">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ヒーローセクション -->
+        <section id="hero" class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="badge fade-in">SINCE 2026 / BROOKLYN STYLE</div>
+                <h1 class="hero-title fade-in">
+                    Where Soul Meets <br>
+                    <span class="text-highlight">The Perfect Brew</span>
+                </h1>
+                <p class="hero-subtitle fade-in">
+                    ブルックリンのインダストリアルロフトを再現した空間で、丁寧に自家焙煎された薫り高いコーヒーと特別なひとときを。
+                </p>
+                <div class="hero-actions fade-in">
+                    <a href="#menu" class="btn btn-primary">Menu Collection</a>
+                    <a href="#reservation" class="btn btn-secondary">Reserve a Table</a>
+                </div>
+            </div>
+            <!-- エジソン電球の装飾 (CSSアニメーションで明滅) -->
+            <div class="edison-bulbs-container">
+                <div class="bulb-wire bulb-1">
+                    <div class="bulb"></div>
+                </div>
+                <div class="bulb-wire bulb-2">
+                    <div class="bulb"></div>
+                </div>
+            </div>
+            <a href="#story" class="scroll-down" aria-label="下にスクロール">
+                <span class="mouse-icon"><span class="wheel"></span></span>
+            </a>
+        </section>
+
+        <!-- ストーリーセクション (Our Story) -->
+        <section id="story" class="story-section section-padding">
+            <div class="container grid-2">
+                <div class="story-image-wrapper reveal-left">
+                    <div class="brick-border"></div>
+                    <img src="images/hero_cafe_loft.png" alt="NYC Loft Cafeの内観" class="story-image">
+                    <div class="floating-badge">
+                        <span class="badge-num">100%</span>
+                        <span class="badge-lbl">Arabica Roast</span>
+                    </div>
+                </div>
+                <div class="story-content reveal-right">
+                    <div class="section-badge">Our Heritage</div>
+                    <h2 class="section-title">ニューヨークの空気感を、そのままこの場所に。</h2>
+                    <p class="section-lead">
+                        レンガの質感、黒いアイアンフレーム、そこで天井から吊り下がる温かいエジソン電球。ブルックリンの廃倉庫を改装したようなインダストリアルロフトをデザインしました。
+                    </p>
+                    <p class="section-desc">
+                        私たちが提供するのは、厳選したシングルオリジン豆を店内のロースターで毎日じっくりと焙煎したこだわりのスペシャルティコーヒー。マンハッタンの朝の喧騒、ブルックリンの静かな午後。ニューヨークの街角に佇んでいるかのような、日常から少し離れた豊かな時間をお届けします。
+                    </p>
+                    <div class="story-features">
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fa-solid fa-mug-hot"></i></div>
+                            <div>
+                                <h3>自家焙煎シングルオリジン</h3>
+                                <p>世界中から厳選した豆を、最適なプロファイルでロースト。</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fa-solid fa-couch"></i></div>
+                            <div>
+                                <h3>居心地の良いロフト空間</h3>
+                                <p>ヴィンテージのレザーソファで、至高のリラックスタイムを。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- メニューセクション (Menu) -->
+        <section id="menu" class="menu-section section-padding">
+            <div class="container text-center">
+                <div class="section-badge">The Menu</div>
+                <h2 class="section-title text-light">NYC Brews & Bites</h2>
+                <p class="section-subtitle">こだわりの自家焙煎コーヒーと、ニューヨークスタイルのブランチメニュー</p>
+                
+                <!-- メニュータブ切り替え -->
+                <div class="menu-tabs">
+                    <button class="tab-btn active" data-tab="coffee">Coffee</button>
+                    <button class="tab-btn" data-tab="espresso">Espresso Drinks</button>
+                    <button class="tab-btn" data-tab="bakery">Bakery</button>
+                    <button class="tab-btn" data-tab="brunch">Brunch & Bites</button>
+                </div>
+
+                <!-- メニューコンテンツ -->
+                <div class="menu-content-wrapper">
+                    <!-- コーヒー カテゴリ -->
+                    <div class="menu-tab-content active" id="coffee">
+                        <div class="menu-grid">
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/loft_blend.jpeg" alt="ブルックリン・ロフトブレンド" class="menu-item-image">
+                                    <span class="menu-item-tag">Signature</span>
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>ブルックリン・ロフトブレンド</h3>
+                                        <span class="menu-item-price">¥650</span>
+                                    </div>
+                                    <p class="menu-item-desc">ダークチョコレートのような深みと、ほのかなベリーの酸味が調和した当店自慢のハウスブレンド。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/colombia.jpeg" alt="コロンビア" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>コロンビア - エル・パライソ</h3>
+                                        <span class="menu-item-price">¥780</span>
+                                    </div>
+                                    <p class="menu-item-desc">アナエロビック（嫌気性発酵）プロセスによる、ピーチやストロベリーのような圧倒的でトロピカルな香り。</p>
+                                </div>
+                            </div>
+
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/ethiopia.jpeg" alt="エチオピア" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>エチオピア - イルガチェフェ</h3>
+                                        <span class="menu-item-price">¥720</span>
+                                    </div>
+                                    <p class="menu-item-desc">紅茶のように華やかでフローラルな香りと、レモングラスのような澄んだ酸味が心地よい一杯。</p>
+                                </div>
+                            </div>
+
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/cold_brew.jpeg" alt="コールドブリュー" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>コールドブリュー (水出し)</h3>
+                                        <span class="menu-item-price">¥680</span>
+                                    </div>
+                                    <p class="menu-item-desc">時間をかけてゆっくりと抽出した、極めてクリーンでまろやかな甘みが特徴のアイスコーヒー。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- エスプレッソドリンク カテゴリ -->
+                    <div class="menu-tab-content" id="espresso">
+                        <div class="menu-grid">
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/latte.jpeg" alt="カフェラテ" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>カフェラテ</h3>
+                                        <span class="menu-item-price">¥680</span>
+                                    </div>
+                                    <p class="menu-item-desc">エスプレッソの濃厚なコクと、きめ細かくスチームしたミルクの自然な甘みが調和した美しいラテアート。</p>
+                                </div>
+                            </div>
+
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/flat_white.jpeg" alt="フラットホワイト" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>フラットホワイト</h3>
+                                        <span class="menu-item-price">¥650</span>
+                                    </div>
+                                    <p class="menu-item-desc">オセアニアスタイル。エスプレッソの味わいをより強く感じられる、シルキーで濃厚なミルクドリンク。</p>
+                                </div>
+                            </div>
+
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/macchiato.jpeg" alt="エスプレッソ マキアート" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>エスプレッソ マキアート</h3>
+                                        <span class="menu-item-price">¥550</span>
+                                    </div>
+                                    <p class="menu-item-desc">濃厚なダブルエスプレッソに、少量のスチームミルクの泡をのせた、エスプレッソの醍醐味を味わう一杯。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ベーカリー カテゴリ -->
+                    <div class="menu-tab-content" id="bakery">
+                        <div class="menu-grid">
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/cheesecake.jpeg" alt="ニューヨーク チーズケーキ" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>ニューヨーク チーズケーキ</h3>
+                                        <span class="menu-item-price">¥680</span>
+                                    </div>
+                                    <p class="menu-item-desc">クリームチーズをふんだんに使用し、湯煎焼きでしっとり濃厚に仕上げた、コーヒーと相性抜群の本場の味。</p>
+                                </div>
+                            </div>
+
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/plain_bagel.jpeg" alt="クラシック ニューヨーク ベーグル" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>クラシック ニューヨーク ベーグル</h3>
+                                        <span class="menu-item-price">¥550</span>
+                                    </div>
+                                    <p class="menu-item-desc">外はカリッと、中はモチモチのプレーンベーグル。クリームチーズと合わせてお召し上がりください。</p>
+                                </div>
+                            </div>
+
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/scone.jpeg" alt="ダブルチョコレートスコーン" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>ダブルチョコレートスコーン</h3>
+                                        <span class="menu-item-price">¥480</span>
+                                    </div>
+                                    <p class="menu-item-desc">ゴロゴロとしたダークチョコレートチップを練り込み、外はサクッと香ばしく焼き上げたアメリカンスコーン。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ブランチ＆バイツ カテゴリ -->
+                    <div class="menu-tab-content" id="brunch">
+                        <div class="menu-grid">
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/avocado_toast.jpeg" alt="アボカドトースト" class="menu-item-image">
+                                    <span class="menu-item-tag">Popular</span>
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>アボカド＆ポーチドエッグ トースト</h3>
+                                        <span class="menu-item-price">¥1,350</span>
+                                    </div>
+                                    <p class="menu-item-desc">サワードゥブレッドの上に、クリーミーなアボカドペースト、ポーチドエッグ、チリフレークをのせたNYC定番メニュー。</p>
+                                </div>
+                            </div>
+
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/lox_bagel.jpeg" alt="ブルックリン Lox ベーグルサンド" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>ブルックリン Lox ベーグルサンド</h3>
+                                        <span class="menu-item-price">¥1,480</span>
+                                    </div>
+                                    <p class="menu-item-desc">焼きたてのベーグルに、スモークサーモン、たっぷりクリームチーズ、赤タマネギ、ケッパーを贅沢にサンド。</p>
+                                </div>
+                            </div>
+
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/french_toast.jpeg" alt="メープルベーコン＆フレンチトースト" class="menu-item-image">
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>メープルベーコン＆フレンチトースト</h3>
+                                        <span class="menu-item-price">¥1,280</span>
+                                    </div>
+                                    <p class="menu-item-desc">厚切りのブリオッシュフレンチトーストに、カリカリのベーコンをのせ、純メープルシロップをかけた甘じょっぱい傑作。</p>
+                                </div>
+                            </div>
+
+                            <div class="menu-item-card">
+                                <div class="menu-item-image-container">
+                                    <img src="images/reuben_sandwich.jpeg" alt="クラシック NYC パストラミ・ルーベンサンド" class="menu-item-image">
+                                    <span class="menu-item-tag">New</span>
+                                </div>
+                                <div class="menu-item-info">
+                                    <div class="menu-item-header">
+                                        <h3>クラシック NYC パストラミ・ルーベンサンド</h3>
+                                        <span class="menu-item-price">¥1,580</span>
+                                    </div>
+                                    <p class="menu-item-desc">ジューシーな薄切りパストラミビーフを何層にも重ね、とろけるスイスチーズと程よい酸味のザワークラウトをライ麦パンでプレスした本場ニューヨークの味。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- アクセス＆営業時間セクション (Access) -->
+        <section id="location" class="location-section section-padding">
+            <div class="container grid-2">
+                <div class="location-info reveal-left">
+                    <div class="section-badge">The Station</div>
+                    <h2 class="section-title">Find Us in the City</h2>
+                    <p class="section-lead">都会のオアシスで、皆様をお待ちしております。</p>
+                    
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="info-icon"><i class="fa-solid fa-location-dot"></i></span>
+                            <div>
+                                <h3>Location</h3>
+                                <p>〒150-0001 東京都渋谷区神宮前 6-X-X <br><span class="sub-text">Subway Line: Jingu-mae Station (Exit 3) - Walk 3 min</span></p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon"><i class="fa-solid fa-clock"></i></span>
+                            <div>
+                                <h3>Hours</h3>
+                                <p>Weekdays: 8:00 AM - 9:00 PM <br>Weekends: 9:00 AM - 10:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon"><i class="fa-solid fa-phone"></i></span>
+                            <div>
+                                <h3>Contact</h3>
+                                <p>03-XXXX-XXXX <br><span class="sub-text">info@nycloftcafe.com</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-wrapper reveal-right">
+                    <!-- スタイリッシュなダークテーマのプレースホルダーマップ -->
+                    <div class="custom-map">
+                        <div class="map-overlay">
+                            <div class="subway-line-dec"></div>
+                            <div class="map-pin">
+                                <div class="pulse"></div>
+                                <i class="fa-solid fa-mug-hot"></i>
+                            </div>
+                            <div class="map-label">
+                                <h4>NYC LOFT CAFE</h4>
+                                <p>Jingu-mae, Shibuya</p>
+                            </div>
+                        </div>
+                        <!-- 地図のグラフィカルな背景装飾 -->
+                        <div class="map-roads"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 予約セクション (Reservation) -->
+        <section id="reservation" class="reservation-section section-padding">
+            <div class="container">
+                <div class="reserve-card">
+                    <div class="reserve-header">
+                        <div class="section-badge">Seat Reservation</div>
+                        <h2>Reserve Your Corner</h2>
+                        <p>居心地の良いお気に入りの席をキープして、ゆったりとお過ごしください。</p>
+                    </div>
+                    
+                    <form id="reservation-form" class="reserve-form">
+                        <div class="form-grid-3">
+                            <div class="form-group">
+                                <label for="name">ご氏名</label>
+                                <input type="text" id="name" required placeholder="ニューヨーク 太郎">
+                            </div>
+                            <div class="form-group">
+                                <label for="guests">人数</label>
+                                <select id="guests">
+                                    <option value="1">1名様 (ソロワーク/カフェ)</option>
+                                    <option value="2" selected>2名様 (ペア)</option>
+                                    <option value="3">3名様</option>
+                                    <option value="4">4名様</option>
+                                    <option value="5">5名様以上 (テーブル席)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">ご希望日</label>
+                                <input type="date" id="date" required>
+                            </div>
+                        </div>
+
+                        <!-- 席タイプ選択 (ヴィジュアルカード) -->
+                        <div class="seat-selection-container">
+                            <label class="section-sub-label">席のタイプをお選びください</label>
+                            <div class="seat-grid">
+                                <label class="seat-card">
+                                    <input type="radio" name="seat-type" value="window" checked>
+                                    <span class="seat-card-content">
+                                        <i class="fa-solid fa-window-maximize seat-icon"></i>
+                                        <span class="seat-name">Window Counter</span>
+                                        <span class="seat-desc">外のストリートを眺められる電源付きの窓際席</span>
+                                    </span>
+                                </label>
+
+                                <label class="seat-card">
+                                    <input type="radio" name="seat-type" value="sofa">
+                                    <span class="seat-card-content">
+                                        <i class="fa-solid fa-couch seat-icon"></i>
+                                        <span class="seat-name">Leather Sofa</span>
+                                        <span class="seat-desc">ヴィンテージレザーでゆったり寛げる特等席</span>
+                                    </span>
+                                </label>
+
+                                <label class="seat-card">
+                                    <input type="radio" name="seat-type" value="bar">
+                                    <span class="seat-card-content">
+                                        <i class="fa-solid fa-chair seat-icon"></i>
+                                        <span class="seat-name">Bar Counter</span>
+                                        <span class="seat-desc">バリスタの抽出を目の前で楽しめる特等席</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="time">ご希望時間</label>
+                                <select id="time">
+                                    <option value="09:00">09:00 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="13:00">01:00 PM</option>
+                                    <option value="15:00">03:00 PM</option>
+                                    <option value="17:00">05:00 PM</option>
+                                    <option value="19:00">07:00 PM</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-end">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <span>予約リクエストを送信</span> <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <!-- 予約完了シミュレーション画面 (デフォルトは非表示) -->
+                    <div id="reservation-success" class="reserve-success-screen">
+                        <i class="fa-solid fa-circle-check success-icon animate-success"></i>
+                        <h3>Thank You for Your Reservation!</h3>
+                        <p class="success-message">お席の確保がシミュレートされました。以下はご予約情報です：</p>
+                        <div class="ticket-box">
+                            <div class="ticket-header">NYC LOFT CAFE - RESERVATION PASS</div>
+                            <div class="ticket-body">
+                                <div class="ticket-row"><span class="lbl">NAME:</span> <span class="val" id="ticket-name"></span></div>
+                                <div class="ticket-row"><span class="lbl">PARTY:</span> <span class="val" id="ticket-guests"></span></div>
+                                <div class="ticket-row"><span class="lbl">DATE:</span> <span class="val" id="ticket-date"></span></div>
+                                <div class="ticket-row"><span class="lbl">TIME:</span> <span class="val" id="ticket-time"></span></div>
+                                <div class="ticket-row"><span class="lbl">SEAT:</span> <span class="val" id="ticket-seat"></span></div>
+                            </div>
+                            <div class="ticket-barcode">||| | |||| | || |||| | | |||</div>
+                        </div>
+                        <button id="btn-reset-reserve" class="btn btn-secondary">別の予約を行う</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo"><span class="logo-accent">NYC</span> LOFT</span>
+                    <p class="footer-slogan">Crafting Brooklyn Vibe & Premium Roast</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#story">Our Story</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#location">Access</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-subway">
+                    <h4>Transit Map</h4>
+                    <div class="subway-art">
+                        <span class="subway-route route-a">A</span>
+                        <span class="subway-route route-c">C</span>
+                        <span class="subway-route route-f">F</span>
+                        <span class="subway-route route-l">L</span>
+                        <p class="subway-station">Jingu-mae Station Underground</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 NYC Loft Cafe & Roasters. All rights reserved. <br><span class="footer-credits">Designed with Industrial-Chic Philosophy.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- スクリプトの読み込み -->
+    <script src="app.js"></script>
+</body>
+</html>
