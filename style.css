@@ -181,22 +181,26 @@ img {
     box-shadow: 0 4px 15px var(--color-accent-glow);
 }
 
-.btn-primary:hover {
-    background-color: var(--color-accent-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+@media (hover: hover) {
+    .btn-primary:hover {
+        background-color: var(--color-accent-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+    }
+    .btn-secondary:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: var(--color-text-light);
+        transform: translateY(-2px);
+    }
+    .btn:hover i {
+        transform: translateX(3px);
+    }
 }
 
 .btn-secondary {
     background-color: transparent;
     color: var(--color-text-light);
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: var(--color-text-light);
-    transform: translateY(-2px);
 }
 
 .btn-block {
@@ -207,10 +211,6 @@ img {
 .btn i {
     margin-left: 0.5rem;
     transition: transform 0.3s ease;
-}
-
-.btn:hover i {
-    transform: translateX(3px);
 }
 
 /* --------------------------------------------------------------------------
@@ -271,7 +271,16 @@ img {
     position: relative;
 }
 
-.nav-link:hover, .nav-link.active {
+@media (hover: hover) {
+    .nav-link:hover {
+        color: var(--color-text-light);
+    }
+    .nav-link:hover::after {
+        width: 100%;
+    }
+}
+
+.nav-link.active {
     color: var(--color-text-light);
 }
 
@@ -286,7 +295,7 @@ img {
     transition: var(--transition-smooth);
 }
 
-.nav-link:hover::after, .nav-link.active::after {
+.nav-link.active::after {
     width: 100%;
 }
 
@@ -301,9 +310,11 @@ img {
     box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
 }
 
-.nav-link-btn:hover {
-    background-color: var(--color-accent-hover);
-    transform: translateY(-1px);
+@media (hover: hover) {
+    .nav-link-btn:hover {
+        background-color: var(--color-accent-hover);
+        transform: translateY(-1px);
+    }
 }
 
 .nav-meta {
@@ -511,8 +522,10 @@ img {
     color: var(--color-text-muted);
 }
 
-.scroll-down:hover {
-    color: var(--color-text-light);
+@media (hover: hover) {
+    .scroll-down:hover {
+        color: var(--color-text-light);
+    }
 }
 
 .mouse-icon {
@@ -687,10 +700,12 @@ img {
     transition: var(--transition-smooth);
 }
 
-.tab-btn:hover {
-    color: var(--color-text-light);
-    background-color: rgba(255,255,255,0.07);
-    border-color: rgba(255,255,255,0.15);
+@media (hover: hover) {
+    .tab-btn:hover {
+        color: var(--color-text-light);
+        background-color: rgba(255,255,255,0.07);
+        border-color: rgba(255,255,255,0.15);
+    }
 }
 
 .tab-btn.active {
@@ -732,10 +747,15 @@ img {
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-.menu-item-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(212, 175, 55, 0.3);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.05);
+@media (hover: hover) {
+    .menu-item-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(212, 175, 55, 0.3);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.05);
+    }
+    .menu-item-card:hover .menu-item-image {
+        transform: scale(1.08);
+    }
 }
 
 /* カード内画像 */
@@ -752,10 +772,6 @@ img {
     height: 100%;
     object-fit: cover;
     transition: var(--transition-smooth);
-}
-
-.menu-item-card:hover .menu-item-image {
-    transform: scale(1.08);
 }
 
 /* プレースホルダー画像 (コーヒー豆イラスト用) */
@@ -1306,11 +1322,17 @@ img {
     font-size: 1.1rem;
 }
 
-.social-links a:hover {
-    color: var(--color-bg-dark);
-    background-color: var(--color-accent);
-    border-color: var(--color-accent);
-    transform: translateY(-3px);
+@media (hover: hover) {
+    .social-links a:hover {
+        color: var(--color-bg-dark);
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        transform: translateY(-3px);
+    }
+    .footer-links a:hover {
+        color: var(--color-text-light);
+        padding-left: 5px;
+    }
 }
 
 .footer-links h4, .footer-subway h4 {
@@ -1328,11 +1350,6 @@ img {
 
 .footer-links li {
     margin-bottom: 0.85rem;
-}
-
-.footer-links a:hover {
-    color: var(--color-text-light);
-    padding-left: 5px;
 }
 
 /* サブウェイ Transit アート */
@@ -1639,8 +1656,10 @@ img {
     z-index: -1;
 }
 
-.menu-item-card:hover::after, .blend-card:hover::after, .brew-card-flat:hover::after {
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+@media (hover: hover) {
+    .menu-item-card:hover::after, .blend-card:hover::after, .brew-card-flat:hover::after {
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+    }
 }
 
 /* 13-1. カスタムブレンドシミュレーター (Roast & Blend Lab) */
@@ -1706,9 +1725,11 @@ img {
     transition: transform 0.2s, background-color 0.2s;
 }
 
-.blend-slider-input::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
-    background: #fff;
+@media (hover: hover) {
+    .blend-slider-input::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+        background: #fff;
+    }
 }
 
 .slider-desc {
@@ -1767,9 +1788,11 @@ img {
     border-bottom: 2px solid transparent;
 }
 
-.blend-tab-btn:hover {
-    color: var(--color-text-light);
-    background-color: rgba(255, 255, 255, 0.02);
+@media (hover: hover) {
+    .blend-tab-btn:hover {
+        color: var(--color-text-light);
+        background-color: rgba(255, 255, 255, 0.02);
+    }
 }
 
 .blend-tab-btn.active {
@@ -2232,11 +2255,13 @@ img {
     transition: var(--transition-smooth);
 }
 
-.map-seat:hover {
-    fill: rgba(212, 175, 55, 0.3);
-    stroke: var(--color-accent);
-    transform: scale(1.15);
-    transform-origin: center;
+@media (hover: hover) {
+    .map-seat:hover {
+        fill: rgba(212, 175, 55, 0.3);
+        stroke: var(--color-accent);
+        transform: scale(1.15);
+        transform-origin: center;
+    }
 }
 
 /* カウンター席とソファのアクティブ表示 */
@@ -2332,8 +2357,10 @@ img {
     transition: color 0.3s;
 }
 
-.player-minimize-btn:hover {
-    color: var(--color-text-light);
+@media (hover: hover) {
+    .player-minimize-btn:hover {
+        color: var(--color-text-light);
+    }
 }
 
 .player-body {
@@ -2483,9 +2510,11 @@ img {
     transition: var(--transition-smooth);
 }
 
-.sound-btn:hover {
-    color: var(--color-text-light);
-    background-color: rgba(255,255,255,0.06);
+@media (hover: hover) {
+    .sound-btn:hover {
+        color: var(--color-text-light);
+        background-color: rgba(255,255,255,0.06);
+    }
 }
 
 .sound-btn.active {
@@ -2519,10 +2548,12 @@ img {
     transition: var(--transition-smooth);
 }
 
-.play-btn:hover {
-    transform: scale(1.08);
-    background-color: #fff;
-    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
+@media (hover: hover) {
+    .play-btn:hover {
+        transform: scale(1.08);
+        background-color: #fff;
+        box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
+    }
 }
 
 .volume-slider-container {
@@ -2579,11 +2610,13 @@ img {
     transition: var(--transition-smooth);
 }
 
-.player-trigger-btn:hover {
-    transform: translateY(-2px);
-    border-color: var(--color-accent);
-    color: #fff;
-    box-shadow: 0 10px 30px var(--color-accent-glow);
+@media (hover: hover) {
+    .player-trigger-btn:hover {
+        transform: translateY(-2px);
+        border-color: var(--color-accent);
+        color: #fff;
+        box-shadow: 0 10px 30px var(--color-accent-glow);
+    }
 }
 
 .ambient-player-widget.active .player-trigger-btn {

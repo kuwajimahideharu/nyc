@@ -1004,10 +1004,10 @@ document.addEventListener('DOMContentLoaded', () => {
         mainGainNode.connect(audioCtx.destination);
 
         // --- 1. Lofi Jazz BGM (CORS制限や file:// 回避のため AudioContext に接続せず直接音量調整) ---
-        jazzAudio = new Audio();
-        jazzAudio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
-        jazzAudio.loop = true;
-        jazzAudio.volume = 0; // 初期音量はゼロ
+        jazzAudio = document.getElementById('bgm-lofi-jazz');
+        if (jazzAudio) {
+            jazzAudio.volume = 0; // 初期音量はゼロ
+        }
 
         // --- 2. プロシージャル雨音用ゲイン ---
         rainGainNode = audioCtx.createGain();
