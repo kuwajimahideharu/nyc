@@ -12,6 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section');
 
+    // パフォーマンス向上：スクロールごとのレイアウト計算（リフロー）を防ぐため、セクションの座標情報をキャッシュします
+    let sectionData = [];
+    const updateSectionData = () => {
+        sectionData = Array.from(sections).map(section => ({
+            id: section.getAttribute('id'),
+            top: section.offsetTop - 120, // ヘッダー分のマージンを考慮
+            height: section.clientHeight
+        }));
+    };
+
+    // 初期化およびウィンドウのリサイズ時に座標情報を更新
+    updateSectionData();
+    window.addEventListener('resize', updateSectionData);
+
     const handleScroll = () => {
         // スクロール時にNavbarをシャープにする
         if (window.scrollY > 50) {
@@ -20,15 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.classList.remove('scrolled');
         }
 
-        // 現在見ているセクションに応じてナビリンクのアクティブクラスを切り替える
+        // キャッシュされた座標データを使用してアクティブリンクを判定（Layout Thrashing を防止）
         let currentSectionId = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 120; // ヘッダー分のマージンを考慮
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-                currentSectionId = section.getAttribute('id');
+        const scrollY = window.scrollY;
+        for (let i = 0; i < sectionData.length; i++) {
+            const data = sectionData[i];
+            if (scrollY >= data.top && scrollY < data.top + data.height) {
+                currentSectionId = data.id;
+                break;
             }
-        });
+        }
 
         navLinks.forEach(link => {
             link.classList.remove('active');
@@ -42,30 +57,86 @@ document.addEventListener('DOMContentLoaded', () => {
     handleScroll(); // 初期読み込み時にも実行
 
     // --------------------------------------------------------------------------
-    // 2. モバイルナビゲーションメニューのトグル
+    // 2. モバイルナビゲーションメニューのトグル ＆ スクロール制御
     // --------------------------------------------------------------------------
     const mobileToggle = document.getElementById('mobile-toggle');
     const navMenu = document.getElementById('nav-menu');
     
     if (mobileToggle && navMenu) {
         mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+            const isActive = navMenu.classList.toggle('active');
             const icon = mobileToggle.querySelector('i');
-            if (navMenu.classList.contains('active')) {
+            if (isActive) {
                 icon.className = 'fa-solid fa-xmark';
+                // iOSにおける背面スクロール防止（スクロールロック）
+                document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflow = 'hidden';
             } else {
                 icon.className = 'fa-solid fa-bars';
+                document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
             }
         });
 
-        // リンククリック時にメニューを閉じる
+        // リンククリック時にメニューを閉じ、iOS Safariで確実に目的位置へスムーズスクロールさせる処理
+        // (iOSのトランジション中クリック無効化バグを回避するため、JavaScriptでプログラム制御スクロールを行います)
         navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                mobileToggle.querySelector('i').className = 'fa-solid fa-bars';
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    // メニューの非表示 ＆ スクロールロック解除
+                    navMenu.classList.remove('active');
+                    const icon = mobileToggle.querySelector('i');
+                    if (icon) icon.className = 'fa-solid fa-bars';
+                    
+                    document.body.style.overflow = '';
+                    document.documentElement.style.overflow = '';
+                    
+                    // スムーズスクロールの実行
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId || 'hero');
+                    if (targetElement) {
+                        // メニューが閉じるアニメーションと干渉しないよう、僅かに遅らせて実行
+                        setTimeout(() => {
+                            const headerOffset = 80;
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                            
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }, 50);
+                    }
+                }
             });
         });
     }
+
+    // ナビゲーションメニュー以外のページ内アンカーリンク（スクロールダウンなど）もJSで滑らかにスクロールさせる
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        if (anchor.closest('.nav-menu')) return; // メニュー内リンクは個別処理されるためスキップ
+        
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            
+            e.preventDefault();
+            const targetElement = document.querySelector(href);
+            if (targetElement) {
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 
     // --------------------------------------------------------------------------
     // 3. リアルタイム営業時間インジケーター (OPEN/CLOSED)
@@ -278,10 +349,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     const scrollProgressBar = document.querySelector('.scroll-progress-bar');
     if (scrollProgressBar) {
+        // パフォーマンス向上：全体の高さの計算をスクロールごとではなくリサイズイベント時に更新
+        let totalScrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        
+        window.addEventListener('resize', () => {
+            totalScrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        });
+        
         window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
+            const winScroll = window.scrollY || document.documentElement.scrollTop;
+            const scrolled = totalScrollHeight > 0 ? (winScroll / totalScrollHeight) * 100 : 0;
             scrollProgressBar.style.width = scrolled + '%';
         });
     }
