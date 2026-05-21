@@ -1598,3 +1598,1044 @@ img {
         gap: 3rem;
     }
 }
+
+/* ==========================================================================
+   13. 新規プレミアム機能のスタイル (Roastery, Brew Lab, SVG Map, Ambient Player)
+   ========================================================================== */
+
+/* 13-0. スクロール進行インジケーター & プレミアムホバー効果 */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent) 0%, #ffc107 100%);
+    width: 0%;
+    z-index: 2000;
+    transition: width 0.1s ease-out;
+}
+
+/* 真鍮ゴールドのプレミアムネオンホバー */
+.menu-item-card, .btn-primary, .reserve-card, .blend-card, .brew-card-flat {
+    position: relative;
+}
+
+.menu-item-card::after, .blend-card::after, .brew-card-flat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0);
+    pointer-events: none;
+    transition: var(--transition-smooth);
+    z-index: -1;
+}
+
+.menu-item-card:hover::after, .blend-card:hover::after, .brew-card-flat:hover::after {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+}
+
+/* 13-1. カスタムブレンドシミュレーター (Roast & Blend Lab) */
+.blend-section {
+    background-color: #161619;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.blend-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.slider-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slider-header label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+}
+
+.slider-val {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.blend-slider-input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    outline: none;
+    transition: background 0.3s;
+}
+
+.blend-slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    border: 2px solid var(--color-bg-dark);
+    cursor: pointer;
+    box-shadow: 0 0 8px var(--color-accent-glow);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.blend-slider-input::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: #fff;
+}
+
+.slider-desc {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+}
+
+/* 焙煎度目盛り */
+.roast-group {
+    background-color: rgba(255, 255, 255, 0.02);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.roast-ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    margin-top: 0.25rem;
+    padding: 0 0.5rem;
+}
+
+/* ブレンドカードビジュアライザー */
+.blend-card {
+    background-color: var(--color-bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.blend-card-tabs {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.blend-tab-btn {
+    flex: 1;
+    padding: 1.25rem;
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    border-bottom: 2px solid transparent;
+}
+
+.blend-tab-btn:hover {
+    color: var(--color-text-light);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.blend-tab-btn.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.blend-card-body {
+    padding: 2.5rem;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+}
+
+.blend-card-actions {
+    padding: 0 2.5rem 2.5rem;
+}
+
+/* レーダーチャート (SVG) スタイル */
+.radar-chart {
+    overflow: visible;
+}
+
+.chart-grid-line {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.08);
+    stroke-width: 1px;
+}
+
+.chart-grid-line.grid-100 {
+    stroke: rgba(255, 255, 255, 0.15);
+    stroke-dasharray: 4;
+}
+
+.chart-axis {
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 1px;
+}
+
+.chart-label {
+    fill: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-anchor: middle;
+}
+
+.label-top { transform: translateY(-5px); }
+.label-right-top { transform: translate(10px, 3px); text-anchor: start; }
+.label-right-bottom { transform: translate(5px, 12px); text-anchor: start; }
+.label-left-bottom { transform: translate(-5px, 12px); text-anchor: end; }
+.label-left-top { transform: translate(-10px, 3px); text-anchor: end; }
+
+/* チャートのデータプロット */
+.chart-data-polygon {
+    fill: rgba(212, 175, 55, 0.25);
+    stroke: var(--color-accent);
+    stroke-width: 2px;
+    transition: points 0.5s ease-out;
+}
+
+.chart-data-dot {
+    fill: #fff;
+    stroke: var(--color-accent);
+    stroke-width: 2px;
+    transition: cx 0.5s ease-out, cy 0.5s ease-out;
+    box-shadow: 0 0 10px var(--color-accent-glow);
+}
+
+/* レトロビンテージ焙煎タグデザイン */
+.vintage-roast-tag {
+    background-color: #f3eedf; /* ヴィンテージペーパー色 */
+    color: #2b2b2a;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 320px;
+    border: 2px solid #2b2b2a;
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    font-family: monospace;
+    position: relative;
+}
+
+.vintage-roast-tag::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-bg-dark);
+    border-radius: 50%;
+    border: 2px solid #2b2b2a;
+    transform: translateY(-50%);
+}
+
+.tag-border-inner {
+    border: 1px dashed #2b2b2a;
+    padding: 1.25rem 1rem;
+}
+
+.tag-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    font-weight: 800;
+    border-bottom: 2px solid #2b2b2a;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tag-blend-name {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: center;
+    border-bottom: 1px solid #2b2b2a;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+.tag-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tag-detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+}
+
+.tag-detail-row .lbl {
+    font-weight: 700;
+}
+
+.tag-footer {
+    border-top: 1px dashed #2b2b2a;
+    padding-top: 0.75rem;
+    text-align: center;
+}
+
+.tag-signature {
+    font-size: 0.6rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+.tag-barcode {
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    opacity: 0.9;
+}
+
+/* 13-2. バリスタハンドドリップタイマー */
+.brew-section {
+    background-color: var(--color-bg-dark);
+}
+
+.brew-card-flat {
+    background-color: var(--color-bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--border-radius-lg);
+    padding: 3rem;
+    height: 100%;
+}
+
+.setup-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.setup-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.brew-methods-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.brew-method-card {
+    cursor: pointer;
+}
+
+.brew-method-card input[type="radio"] {
+    display: none;
+}
+
+.brew-method-card .method-content {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    background-color: rgba(255,255,255,0.01);
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.brew-method-card .method-content i {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+    transition: var(--transition-smooth);
+}
+
+.brew-method-card .method-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.brew-method-card .method-desc {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+}
+
+.brew-method-card input[type="radio"]:checked + .method-content {
+    border-color: var(--color-accent);
+    background-color: rgba(212, 175, 55, 0.03);
+}
+
+.brew-method-card input[type="radio"]:checked + .method-content i {
+    color: var(--color-accent);
+    transform: scale(1.1);
+}
+
+.brew-select {
+    background-color: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-light);
+    padding: 0.85rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.brew-calc-results {
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+}
+
+.calc-row .lbl {
+    color: var(--color-text-muted);
+    font-weight: 300;
+}
+
+.calc-row .val {
+    font-weight: 600;
+}
+
+/* タイマー盤面 */
+.timer-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.circular-timer {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 2rem;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bar {
+    transition: stroke-dashoffset 0.3s;
+}
+
+.timer-text-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-time {
+    font-family: monospace;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--color-text-light);
+    line-height: 1;
+    letter-spacing: 0.05em;
+}
+
+.timer-state-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+}
+
+.timer-instructions {
+    margin-bottom: 2.5rem;
+    min-height: 80px;
+}
+
+.timer-instructions h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-light);
+}
+
+.timer-instructions p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 280px;
+}
+
+.timer-actions {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.timer-actions .btn {
+    min-width: 130px;
+}
+
+/* 13-3. インタラクティブ店舗座席マップ (SVG Floor Map) */
+.seat-booking-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.seat-map-wrapper {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+    box-shadow: inset 0 4px 20px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cafe-floor-map {
+    overflow: visible;
+}
+
+.map-wall-bg {
+    fill: rgba(18, 18, 20, 0.95);
+}
+
+.map-wall {
+    fill: none;
+    stroke: rgba(255,255,255,0.08);
+    stroke-width: 2px;
+}
+
+.map-door {
+    stroke: #ff5555;
+    stroke-width: 4px;
+    stroke-linecap: round;
+}
+
+.map-door-text {
+    fill: #ff5555;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+.map-window {
+    stroke: var(--color-accent);
+    stroke-width: 3px;
+    stroke-linecap: round;
+    opacity: 0.6;
+}
+
+.map-window-text {
+    fill: var(--color-text-muted);
+    font-size: 7px;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+}
+
+.map-furniture {
+    fill: rgba(255,255,255,0.03);
+    stroke: rgba(255,255,255,0.12);
+    stroke-width: 1px;
+}
+
+.map-furniture-text {
+    fill: var(--color-text-muted);
+    font-size: 8px;
+    font-weight: 600;
+    text-anchor: middle;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+}
+
+.roaster-text {
+    font-size: 7px;
+}
+
+.map-barista-line {
+    fill: none;
+    stroke: rgba(255,255,255,0.06);
+    stroke-width: 1px;
+    stroke-dasharray: 2;
+}
+
+.map-roaster {
+    fill: rgba(255, 255, 255, 0.02);
+    stroke: rgba(212, 175, 55, 0.2);
+    stroke-width: 1.5px;
+    stroke-dasharray: 3;
+}
+
+/* インタラクティブ座席 */
+.map-seat {
+    cursor: pointer;
+    fill: rgba(255, 255, 255, 0.1);
+    stroke: rgba(255, 255, 255, 0.25);
+    stroke-width: 1.5px;
+    transition: var(--transition-smooth);
+}
+
+.map-seat:hover {
+    fill: rgba(212, 175, 55, 0.3);
+    stroke: var(--color-accent);
+    transform: scale(1.15);
+    transform-origin: center;
+}
+
+/* カウンター席とソファのアクティブ表示 */
+.map-seat.selected {
+    fill: var(--color-accent) !important;
+    stroke: #fff !important;
+    filter: drop-shadow(0 0 8px var(--color-accent));
+    animation: map-pulse-seat 2.5s infinite alternate;
+}
+
+/* ソファ席全体を覆う座席判定の透明度 */
+.seat-sofa {
+    fill: rgba(255, 255, 255, 0.02);
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-dasharray: 2;
+}
+
+.seat-sofa.selected {
+    fill: rgba(212, 175, 55, 0.1) !important;
+    stroke: var(--color-accent) !important;
+    stroke-dasharray: none;
+    filter: drop-shadow(0 0 5px var(--color-accent-glow));
+}
+
+@keyframes map-pulse-seat {
+    0% { filter: drop-shadow(0 0 3px var(--color-accent-glow)); }
+    100% { filter: drop-shadow(0 0 10px var(--color-accent)); }
+}
+
+/* 13-4. フローティングレコードプレイヤー (Ambient Audio Widget) */
+.ambient-player-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.player-glass {
+    width: 300px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05);
+    overflow: hidden;
+    margin-bottom: 1rem;
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ambient-player-widget.active .player-glass {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.player-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.player-title i {
+    color: var(--color-accent);
+}
+
+.player-minimize-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+}
+
+.player-minimize-btn:hover {
+    color: var(--color-text-light);
+}
+
+.player-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* リアルなビニールレコード盤 */
+.vinyl-container {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin-bottom: 1.25rem;
+}
+
+.vinyl-record {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2c2c2f 0%, #151517 35%, #08080a 60%, #000 100%);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+}
+
+/* ビニール盤面のグルーヴ(溝)表現 */
+.vinyl-record::after {
+    content: '';
+    position: absolute;
+    top: 5px; left: 5px; right: 5px; bottom: 5px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.03);
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.05);
+}
+
+.vinyl-label {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vinyl-label::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-bg-dark);
+}
+
+/* トーンアーム (針) */
+.vinyl-tonearm {
+    position: absolute;
+    top: -5px;
+    right: 15px;
+    width: 25px;
+    height: 60px;
+    border-left: 2px solid #888;
+    border-bottom: 2px solid #888;
+    border-bottom-left-radius: 4px;
+    transform-origin: top right;
+    transform: rotate(0deg);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.vinyl-tonearm::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: -4px;
+    width: 8px;
+    height: 6px;
+    background-color: #d4af37;
+    border-radius: 1px;
+}
+
+/* 音楽再生時のトーンアーム＆レコードの回転 */
+.ambient-player-widget.playing .vinyl-record {
+    animation: rotate-vinyl 4s linear infinite;
+}
+
+.ambient-player-widget.playing .vinyl-tonearm {
+    transform: rotate(22deg);
+}
+
+@keyframes rotate-vinyl {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.player-info {
+    text-align: center;
+    margin-bottom: 1.25rem;
+    width: 100%;
+}
+
+.track-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-status {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+}
+
+/* 各音源のトグルボタン */
+.sound-toggles {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    margin-bottom: 1.25rem;
+}
+
+.sound-btn {
+    flex: 1;
+    background-color: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--color-text-muted);
+    padding: 0.5rem 0.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    transition: var(--transition-smooth);
+}
+
+.sound-btn:hover {
+    color: var(--color-text-light);
+    background-color: rgba(255,255,255,0.06);
+}
+
+.sound-btn.active {
+    color: var(--color-bg-dark);
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 10px var(--color-accent-glow);
+}
+
+/* 再生・ボリュームコントロール */
+.player-controls {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 1.25rem;
+}
+
+.play-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    border: none;
+    color: var(--color-bg-dark);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px var(--color-accent-glow);
+    transition: var(--transition-smooth);
+}
+
+.play-btn:hover {
+    transform: scale(1.08);
+    background-color: #fff;
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
+}
+
+.volume-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.volume-icon {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+    border: 1px solid var(--color-bg-dark);
+}
+
+/* プレイヤー起動用のトリガーボタン */
+.player-trigger-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    padding: 0.75rem 1.25rem;
+    border-radius: 50px;
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    transition: var(--transition-smooth);
+}
+
+.player-trigger-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent);
+    color: #fff;
+    box-shadow: 0 10px 30px var(--color-accent-glow);
+}
+
+.ambient-player-widget.active .player-trigger-btn {
+    transform: translateY(20px) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spin-slow {
+    animation: rotate-vinyl 8s linear infinite;
+}
+
+.trigger-badge {
+    color: var(--color-text-light);
+}
+
+/* 13-5. 新規機能用メディアクエリ (レスポンシブ拡張) */
+@media (max-width: 768px) {
+    .blend-sliders {
+        margin-top: 2rem;
+        gap: 1.75rem;
+    }
+    
+    .blend-card-body {
+        padding: 1.5rem;
+    }
+    
+    .blend-card-actions {
+        padding: 0 1.5rem 1.5rem;
+    }
+    
+    .brew-card-flat {
+        padding: 2rem 1.5rem;
+    }
+    
+    .brew-methods-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .seat-booking-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .seat-map-wrapper {
+        order: -1; /* モバイルでは見取り図を上にする */
+        padding: 1rem;
+    }
+    
+    .ambient-player-widget {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        align-items: flex-end;
+    }
+    
+    .player-glass {
+        width: 280px;
+    }
+}

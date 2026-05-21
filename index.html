@@ -122,6 +122,146 @@
             </div>
         </section>
 
+        <!-- カスタムブレンドシミュレーターセクション (NEW) -->
+        <section id="blend-lab" class="blend-section section-padding">
+            <div class="container grid-2">
+                <div class="blend-controls-wrapper reveal-left">
+                    <div class="section-badge">Roast & Blend Lab</div>
+                    <h2 class="section-title text-light">Create Your Blend</h2>
+                    <p class="section-lead text-light">自分好みの豆の比率と焙煎度を調整して、世界に一つだけのシグニチャーブレンドを設計してください。</p>
+                    
+                    <div class="blend-sliders">
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <label for="blend-colombia"><i class="fa-solid fa-seedling text-highlight"></i> Colombia (エル・パライソ)</label>
+                                <span class="slider-val" id="val-colombia">35%</span>
+                            </div>
+                            <input type="range" id="blend-colombia" class="blend-slider-input" min="0" max="100" value="35">
+                            <span class="slider-desc">ピーチやストロベリーの圧倒的なトロピカルアロマと甘み</span>
+                        </div>
+                        
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <label for="blend-ethiopia"><i class="fa-solid fa-seedling text-highlight"></i> Ethiopia (イルガチェフェ)</label>
+                                <span class="slider-val" id="val-ethiopia">35%</span>
+                            </div>
+                            <input type="range" id="blend-ethiopia" class="blend-slider-input" min="0" max="100" value="35">
+                            <span class="slider-desc">華やかでフローラルな香りと、レモングラスの澄んだ酸味</span>
+                        </div>
+                        
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <label for="blend-brazil"><i class="fa-solid fa-seedling text-highlight"></i> Brazil (サントス)</label>
+                                <span class="slider-val" id="val-brazil">30%</span>
+                            </div>
+                            <input type="range" id="blend-brazil" class="blend-slider-input" min="0" max="100" value="30">
+                            <span class="slider-desc">香ばしいナッツとダークチョコレートのようなコク、豊かなボディ</span>
+                        </div>
+
+                        <div class="slider-group roast-group">
+                            <div class="slider-header">
+                                <label for="blend-roast"><i class="fa-solid fa-fire text-highlight"></i> Roasting Level (焙煎度)</label>
+                                <span class="slider-val" id="val-roast">Medium Roast</span>
+                            </div>
+                            <input type="range" id="blend-roast" class="blend-slider-input" min="1" max="3" value="2" step="1">
+                            <div class="roast-ticks">
+                                <span>Light (浅煎り)</span>
+                                <span>Medium (中煎り)</span>
+                                <span>Dark (深煎り)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blend-visualizer-wrapper reveal-right">
+                    <!-- レーダーチャートとビンテージラベルの切り替え -->
+                    <div class="blend-card">
+                        <div class="blend-card-tabs">
+                            <button class="blend-tab-btn active" id="btn-show-chart">Flavor Profile</button>
+                            <button class="blend-tab-btn" id="btn-show-label">Roast Tag</button>
+                        </div>
+                        
+                        <div class="blend-card-body">
+                            <!-- フレーバープロファイル (SVGレーダーチャート) -->
+                            <div class="blend-chart-container" id="blend-chart-view">
+                                <svg class="radar-chart" viewBox="0 0 300 300" width="100%" height="280px">
+                                    <!-- 背景の多角形 (5角形) -->
+                                    <polygon points="150,30 264,113 220,247 80,247 36,113" class="chart-grid-line grid-100" />
+                                    <polygon points="150,60 241,126 206,233 94,233 59,126" class="chart-grid-line grid-80" />
+                                    <polygon points="150,90 218,140 192,220 108,220 82,140" class="chart-grid-line grid-60" />
+                                    <polygon points="150,120 196,153 178,206 122,206 104,153" class="chart-grid-line grid-40" />
+                                    <!-- 軸線 -->
+                                    <line x1="150" y1="150" x2="150" y2="30" class="chart-axis" />
+                                    <line x1="150" y1="150" x2="264" y2="113" class="chart-axis" />
+                                    <line x1="150" y1="150" x2="220" y2="247" class="chart-axis" />
+                                    <line x1="150" y1="150" x2="80" y2="247" class="chart-axis" />
+                                    <line x1="150" y1="150" x2="36" y2="113" class="chart-axis" />
+                                    <!-- 軸ラベル -->
+                                    <text x="150" y="20" class="chart-label label-top">Acidity (酸味)</text>
+                                    <text x="275" y="115" class="chart-label label-right-top">Aroma (香り)</text>
+                                    <text x="230" y="265" class="chart-label label-right-bottom">Sweetness (甘み)</text>
+                                    <text x="70" y="265" class="chart-label label-left-bottom">Body (コク)</text>
+                                    <text x="25" y="115" class="chart-label label-left-top">Bitterness (苦味)</text>
+                                    
+                                    <!-- 動的フレーバーデータ表示用のポリゴン -->
+                                    <polygon points="" id="radar-data-polygon" class="chart-data-polygon" />
+                                    <!-- 動的データポイントの円 -->
+                                    <circle cx="150" cy="150" r="4" class="chart-data-dot" id="dot-acidity" />
+                                    <circle cx="150" cy="150" r="4" class="chart-data-dot" id="dot-aroma" />
+                                    <circle cx="150" cy="150" r="4" class="chart-data-dot" id="dot-sweetness" />
+                                    <circle cx="150" cy="150" r="4" class="chart-data-dot" id="dot-body" />
+                                    <circle cx="150" cy="150" r="4" class="chart-data-dot" id="dot-bitterness" />
+                                </svg>
+                            </div>
+                            
+                            <!-- ビンテージ焙煎タグ -->
+                            <div class="blend-tag-container hidden" id="blend-label-view">
+                                <div class="vintage-roast-tag">
+                                    <div class="tag-border-inner">
+                                        <div class="tag-header">
+                                            <span class="tag-title">NYC LOFT CAFE & ROASTERS</span>
+                                            <span class="tag-serial" id="tag-serial-num">#BATCH-2026-B</span>
+                                        </div>
+                                        <div class="tag-body">
+                                            <div class="tag-blend-name" id="tag-blend-name">BROOKLYN VELVET ROAST</div>
+                                            <div class="tag-details">
+                                                <div class="tag-detail-row">
+                                                    <span class="lbl">ROASTING LEVEL:</span>
+                                                    <span class="val" id="tag-roast-level">MEDIUM ROAST</span>
+                                                </div>
+                                                <div class="tag-detail-row">
+                                                    <span class="lbl">COLOMBIA RATIO:</span>
+                                                    <span class="val" id="tag-ratio-colombia">35%</span>
+                                                </div>
+                                                <div class="tag-detail-row">
+                                                    <span class="lbl">ETHIOPIA RATIO:</span>
+                                                    <span class="val" id="tag-ratio-ethiopia">35%</span>
+                                                </div>
+                                                <div class="tag-detail-row">
+                                                    <span class="lbl">BRAZIL RATIO:</span>
+                                                    <span class="val" id="tag-ratio-brazil">30%</span>
+                                                </div>
+                                            </div>
+                                            <div class="tag-footer">
+                                                <div class="tag-signature">ROASTED BY BARISTA & YOU</div>
+                                                <div class="tag-barcode">||||| | || |||| | | |||</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blend-card-actions">
+                            <button class="btn btn-secondary btn-block" type="button" id="btn-apply-blend">
+                                <i class="fa-solid fa-mug-saucer"></i> <span>このブレンドを予約に適用する</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- メニューセクション (Menu) -->
         <section id="menu" class="menu-section section-padding">
             <div class="container text-center">
@@ -330,7 +470,7 @@
 
                             <div class="menu-item-card">
                                 <div class="menu-item-image-container">
-                                    <img src="images/reuben_sandwich.jpeg" alt="クラシック NYC パストラミ・ルーベンサンド" class="menu-item-image">
+                                    <img src="images/reuben_sandwich.png" alt="クラシック NYC パストラミ・ルーベンサンド" class="menu-item-image">
                                     <span class="menu-item-tag">New</span>
                                 </div>
                                 <div class="menu-item-info">
@@ -340,6 +480,96 @@
                                     </div>
                                     <p class="menu-item-desc">ジューシーな薄切りパストラミビーフを何層にも重ね、とろけるスイスチーズと程よい酸味のザワークラウトをライ麦パンでプレスした本場ニューヨークの味。</p>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- バリスタドリップガイド＆タイマーセクション (NEW) -->
+        <section id="brew-lab" class="brew-section section-padding">
+            <div class="container">
+                <div class="text-center">
+                    <div class="section-badge">Brewing Science</div>
+                    <h2 class="section-title text-light">Barista Brew Guide</h2>
+                    <p class="section-subtitle">プロのドリップ技術を自宅で。器具と杯数に応じたリアルタイム抽出タイマー</p>
+                </div>
+                
+                <div class="brew-container grid-2">
+                    <div class="brew-setup reveal-left">
+                        <div class="brew-card-flat">
+                            <div class="setup-group">
+                                <label class="setup-label"><i class="fa-solid fa-filter text-highlight"></i> 抽出器具の選択</label>
+                                <div class="brew-methods-grid">
+                                    <label class="brew-method-card">
+                                        <input type="radio" name="brew-method" value="v60" checked>
+                                        <span class="method-content">
+                                            <i class="fa-solid fa-filter"></i>
+                                            <span class="method-name">Hario V60</span>
+                                            <span class="method-desc">すっきりクリアで華やか</span>
+                                        </span>
+                                    </label>
+                                    <label class="brew-method-card">
+                                        <input type="radio" name="brew-method" value="press">
+                                        <span class="method-content">
+                                            <i class="fa-solid fa-mug-hot"></i>
+                                            <span class="method-name">French Press</span>
+                                            <span class="method-desc">豊かなオイル分と重厚感</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setup-group">
+                                <label for="brew-cups" class="setup-label"><i class="fa-solid fa-circle-question text-highlight"></i> 抽出杯数</label>
+                                <select id="brew-cups" class="brew-select">
+                                    <option value="1">1杯 (約 230ml)</option>
+                                    <option value="2" selected>2杯 (約 460ml)</option>
+                                    <option value="3">3杯 (約 690ml)</option>
+                                    <option value="4">4杯 (約 920ml)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="brew-calc-results">
+                                <div class="calc-row">
+                                    <span class="lbl">必要なコーヒー豆:</span>
+                                    <span class="val text-highlight" id="calc-beans">30 g</span>
+                                </div>
+                                <div class="calc-row">
+                                    <span class="lbl">使用する総湯量:</span>
+                                    <span class="val text-highlight" id="calc-water">460 ml</span>
+                                </div>
+                                <div class="calc-row">
+                                    <span class="lbl">推奨湯温:</span>
+                                    <span class="val">92 ℃</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="brew-timer reveal-right">
+                        <div class="brew-card-flat timer-center">
+                            <!-- タイマーの円形プログレスバー -->
+                            <div class="circular-timer">
+                                <svg class="progress-ring" width="200" height="200">
+                                    <circle class="progress-ring-bg" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent" r="85" cx="100" cy="100"/>
+                                    <circle class="progress-ring-bar" id="timer-progress-bar" stroke="var(--color-accent)" stroke-width="8" stroke-dasharray="534" stroke-dashoffset="534" fill="transparent" r="85" cx="100" cy="100"/>
+                                </svg>
+                                <div class="timer-text-container">
+                                    <span class="timer-time" id="timer-clock">00:00</span>
+                                    <span class="timer-state-label" id="timer-state">READY</span>
+                                </div>
+                            </div>
+                            
+                            <div class="timer-instructions">
+                                <h3 id="timer-step-title">Brewing Guide</h3>
+                                <p id="timer-step-instruction">「スタート」ボタンを押して、バリスタドリップのシミュレーションを開始してください。</p>
+                            </div>
+                            
+                            <div class="timer-actions">
+                                <button class="btn btn-primary" type="button" id="btn-timer-start"><i class="fa-solid fa-play"></i> スタート</button>
+                                <button class="btn btn-secondary hidden" type="button" id="btn-timer-reset"><i class="fa-solid fa-rotate-left"></i> リセット</button>
                             </div>
                         </div>
                     </div>
@@ -433,36 +663,90 @@
                             </div>
                         </div>
 
-                        <!-- 席タイプ選択 (ヴィジュアルカード) -->
+                        <!-- 席タイプ選択 (ヴィジュアルカード & SVGマップ) -->
                         <div class="seat-selection-container">
-                            <label class="section-sub-label">席のタイプをお選びください</label>
-                            <div class="seat-grid">
-                                <label class="seat-card">
-                                    <input type="radio" name="seat-type" value="window" checked>
-                                    <span class="seat-card-content">
-                                        <i class="fa-solid fa-window-maximize seat-icon"></i>
-                                        <span class="seat-name">Window Counter</span>
-                                        <span class="seat-desc">外のストリートを眺められる電源付きの窓際席</span>
-                                    </span>
-                                </label>
+                            <label class="section-sub-label">席のタイプをお選びください（マップから直接選択も可能）</label>
+                            
+                            <div class="seat-booking-layout">
+                                <!-- インタラクティブ店舗見取り図マップ (SVG) -->
+                                <div class="seat-map-wrapper">
+                                    <svg class="cafe-floor-map" viewBox="0 0 400 240" width="100%" height="220px">
+                                        <!-- カフェの輪郭・壁 -->
+                                        <rect x="10" y="10" width="380" height="220" rx="8" class="map-wall-bg" />
+                                        <rect x="10" y="10" width="380" height="220" rx="8" class="map-wall" />
+                                        
+                                        <!-- エントランスドア表示 -->
+                                        <line x1="390" y1="120" x2="390" y2="160" class="map-door" />
+                                        <text x="375" y="145" class="map-door-text" transform="rotate(90 375 145)">ENTRANCE</text>
+                                        
+                                        <!-- 窓際カウンター席 (Window Counter) -->
+                                        <!-- 左側の窓ガラス -->
+                                        <line x1="10" y1="40" x2="10" y2="200" class="map-window" />
+                                        <text x="18" y="120" class="map-window-text" transform="rotate(-90 18 120)">STREET WINDOW</text>
+                                        <!-- 窓際カウンターテーブル -->
+                                        <rect x="10" y="40" width="20" height="160" class="map-furniture" />
+                                        <!-- 窓際スツール (3席) -->
+                                        <circle cx="20" cy="65" r="8" class="map-seat seat-window" data-seat="window" />
+                                        <circle cx="20" cy="120" r="8" class="map-seat seat-window" data-seat="window" />
+                                        <circle cx="20" cy="175" r="8" class="map-seat seat-window" data-seat="window" />
+                                        
+                                        <!-- エスプレッソバーカウンター (Bar Counter) -->
+                                        <!-- カウンターテーブル -->
+                                        <rect x="230" y="40" width="80" height="25" rx="2" class="map-furniture" />
+                                        <text x="270" y="56" class="map-furniture-text">BAR</text>
+                                        <!-- バリスタエリア -->
+                                        <path d="M 230 15 L 310 15" class="map-barista-line" />
+                                        <!-- バースツール (3席) -->
+                                        <circle cx="245" cy="80" r="8" class="map-seat seat-bar" data-seat="bar" />
+                                        <circle cx="270" cy="80" r="8" class="map-seat seat-bar" data-seat="bar" />
+                                        <circle cx="295" cy="80" r="8" class="map-seat seat-bar" data-seat="bar" />
+                                        
+                                        <!-- ヴィンテージレザーソファ席 (Leather Sofa) -->
+                                        <!-- ソファテーブル -->
+                                        <rect x="110" y="110" width="50" height="40" rx="4" class="map-furniture" />
+                                        <!-- ソファ (上、下、左) -->
+                                        <rect x="115" y="90" width="40" height="12" rx="2" class="map-furniture sofa-seat-top" />
+                                        <rect x="115" y="158" width="40" height="12" rx="2" class="map-furniture sofa-seat-bottom" />
+                                        <!-- ソファエリア全体を覆う座席判定 -->
+                                        <rect x="105" y="85" width="60" height="90" rx="6" class="map-seat seat-sofa" data-seat="sofa" />
+                                        <text x="135" y="135" class="map-furniture-text">SOFA</text>
+                                        
+                                        <!-- 巨大ロースターマシン (Roaster) -->
+                                        <circle cx="330" cy="180" r="18" class="map-furniture map-roaster" />
+                                        <text x="330" y="184" class="map-furniture-text roaster-text">ROASTER</text>
+                                    </svg>
+                                </div>
+                                
+                                <div class="seat-options-wrapper">
+                                    <div class="seat-grid">
+                                        <label class="seat-card">
+                                            <input type="radio" name="seat-type" value="window" checked>
+                                            <span class="seat-card-content">
+                                                <i class="fa-solid fa-window-maximize seat-icon"></i>
+                                                <span class="seat-name">Window Counter</span>
+                                                <span class="seat-desc">外のストリートを眺められる電源付きの窓際席</span>
+                                            </span>
+                                        </label>
 
-                                <label class="seat-card">
-                                    <input type="radio" name="seat-type" value="sofa">
-                                    <span class="seat-card-content">
-                                        <i class="fa-solid fa-couch seat-icon"></i>
-                                        <span class="seat-name">Leather Sofa</span>
-                                        <span class="seat-desc">ヴィンテージレザーでゆったり寛げる特等席</span>
-                                    </span>
-                                </label>
+                                        <label class="seat-card">
+                                            <input type="radio" name="seat-type" value="sofa">
+                                            <span class="seat-card-content">
+                                                <i class="fa-solid fa-couch seat-icon"></i>
+                                                <span class="seat-name">Leather Sofa</span>
+                                                <span class="seat-desc">ヴィンテージレザーでゆったり寛げる特等席</span>
+                                            </span>
+                                        </label>
 
-                                <label class="seat-card">
-                                    <input type="radio" name="seat-type" value="bar">
-                                    <span class="seat-card-content">
-                                        <i class="fa-solid fa-chair seat-icon"></i>
-                                        <span class="seat-name">Bar Counter</span>
-                                        <span class="seat-desc">バリスタの抽出を目の前で楽しめる特等席</span>
-                                    </span>
-                                </label>
+                                        <label class="seat-card">
+                                            <input type="radio" name="seat-type" value="bar">
+                                            <span class="seat-card-content">
+                                                <i class="fa-solid fa-chair seat-icon"></i>
+                                                <span class="seat-name">Bar Counter</span>
+                                                <span class="seat-desc">バリスタの抽出を目の前で楽しめる特等席</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -550,6 +834,56 @@
             </div>
         </div>
     </footer>
+
+    <!-- ブルックリン・アンビエント音響プレイヤー (フローティングウィジェット) (NEW) -->
+    <div class="ambient-player-widget" id="ambient-player">
+        <div class="player-glass">
+            <div class="player-header">
+                <span class="player-title"><i class="fa-solid fa-compact-disc"></i> Brooklyn Soundscape</span>
+                <button class="player-minimize-btn" type="button" id="player-minimize" aria-label="プレイヤーを閉じる">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="player-body">
+                <div class="vinyl-container">
+                    <div class="vinyl-record" id="vinyl-record">
+                        <div class="vinyl-label"></div>
+                    </div>
+                    <div class="vinyl-tonearm" id="vinyl-tonearm"></div>
+                </div>
+                <div class="player-info">
+                    <div class="track-title" id="track-title">Brooklyn Jazz Lounge</div>
+                    <div class="track-status" id="track-status">Click play to enjoy ambient BGM</div>
+                </div>
+                <!-- 音源コントロール -->
+                <div class="sound-toggles">
+                    <button class="sound-btn active" type="button" id="btn-sound-jazz" title="Lofi Jazz BGM">
+                        <i class="fa-solid fa-music"></i> <span>Jazz</span>
+                    </button>
+                    <button class="sound-btn" type="button" id="btn-sound-rain" title="Rain Ambient">
+                        <i class="fa-solid fa-cloud-showers-heavy"></i> <span>Rain</span>
+                    </button>
+                    <button class="sound-btn" type="button" id="btn-sound-crackle" title="Vinyl Crackle">
+                        <i class="fa-solid fa-circle-nodes"></i> <span>Crackle</span>
+                    </button>
+                </div>
+                <!-- ボリューム & プレイ -->
+                <div class="player-controls">
+                    <button class="play-btn" type="button" id="player-play-btn" aria-label="再生/一時停止">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <div class="volume-slider-container">
+                        <i class="fa-solid fa-volume-low volume-icon"></i>
+                        <input type="range" id="player-volume" class="volume-slider" min="0" max="100" value="50">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="player-trigger-btn" type="button" id="player-trigger" aria-label="音楽プレイヤーを開く">
+            <i class="fa-solid fa-compact-disc spin-slow"></i>
+            <span class="trigger-badge">Ambient ON</span>
+        </button>
+    </div>
 
     <!-- スクリプトの読み込み -->
     <script src="app.js"></script>
