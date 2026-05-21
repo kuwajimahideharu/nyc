@@ -1550,16 +1550,6 @@ img {
     }
     
     /* モバイルナビゲーション */
-    .navbar {
-        pointer-events: none;
-    }
-    
-    .nav-container .logo,
-    .nav-container .mobile-toggle,
-    .nav-container .status-indicator {
-        pointer-events: auto;
-    }
-    
     .mobile-toggle {
         display: block;
     }
@@ -1567,7 +1557,7 @@ img {
     .nav-menu {
         position: fixed;
         top: 80px;
-        left: -100%;
+        left: 0;
         width: 100%;
         height: calc(100vh - 80px);
         background-color: rgba(18, 18, 20, 0.98);
@@ -1576,16 +1566,29 @@ img {
         flex-direction: column;
         padding: 4rem 2rem;
         gap: 2rem;
-        transition: var(--transition-smooth);
         border-top: 1px solid rgba(255,255,255,0.05);
-        visibility: hidden; /* iOSでの誤クリック・重なり防止 */
-        pointer-events: none; /* iOSでの誤タップ防止 */
+        
+        /* 完全に非表示にしてWebKitの合成レイヤー・ヒットテストからパージ */
+        display: none;
+        opacity: 0;
+        pointer-events: none;
     }
     
     .nav-menu.active {
-        left: 0;
-        visibility: visible;
+        display: flex;
         pointer-events: auto;
+        animation: mobileMenuFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes mobileMenuFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     
     .nav-link {
@@ -1645,6 +1648,7 @@ img {
     width: 0%;
     z-index: 2000;
     transition: width 0.1s ease-out;
+    pointer-events: none; /* クリックやスクロール操作を一切妨げない */
 }
 
 /* 真鍮ゴールドのプレミアムネオンホバー */
@@ -2310,6 +2314,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    pointer-events: none; /* コンテナ自体はクリックイベントを通過させる */
 }
 
 .player-glass {
@@ -2322,16 +2327,28 @@ img {
     box-shadow: 0 15px 40px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05);
     overflow: hidden;
     margin-bottom: 1rem;
-    transform: translateY(20px) scale(0.95);
+    
+    /* 完全に非表示にしてWebKitの合成レイヤー・ヒットテストからパージ */
+    display: none;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ambient-player-widget.active .player-glass {
-    transform: translateY(0) scale(1);
-    opacity: 1;
+    display: block;
     pointer-events: auto;
+    animation: playerFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes playerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .player-header {
@@ -2618,6 +2635,7 @@ img {
     cursor: pointer;
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     transition: var(--transition-smooth);
+    pointer-events: auto; /* 親が pointer-events: none のため明示的に有効化 */
 }
 
 @media (hover: hover) {
