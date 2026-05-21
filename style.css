@@ -1528,7 +1528,10 @@ img {
         gap: 3rem;
     }
     .hero-section {
+        min-height: 560px; /* モバイル向けに最小高さを調整 */
+        padding-top: 90px;  /* 固定ヘッダーの重なりを防ぐ十分な余白 */
         padding-left: 5%;
+        padding-right: 5%;
         justify-content: center;
         text-align: center;
     }
